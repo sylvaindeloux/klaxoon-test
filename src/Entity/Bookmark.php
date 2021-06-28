@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name = "bookmarks")
  * @ORM\Entity(repositoryClass = BookmarkRepository::class)
  */
-final class Bookmark
+final class Bookmark implements EntityInterface
 {
     /**
      * @ORM\Id()

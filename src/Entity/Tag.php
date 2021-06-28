@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name = "tags")
  * @ORM\Entity(repositoryClass = TagRepository::class)
  */
-final class Tag
+final class Tag implements EntityInterface
 {
     /**
      * @ORM\Id()

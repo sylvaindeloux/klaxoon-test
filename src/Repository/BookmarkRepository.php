@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Bookmark;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-final class BookmarkRepository extends ServiceEntityRepository
+final class BookmarkRepository extends AbstractRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Bookmark;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Tag;
 use Doctrine\Persistence\ManagerRegistry;
 
-final class TagRepository extends ServiceEntityRepository
+final class TagRepository extends AbstractRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
