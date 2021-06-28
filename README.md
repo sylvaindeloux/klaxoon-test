@@ -7,6 +7,11 @@ The given stack has been modified to work on a Mac without Docker.
 * PHP 7.4.x
 * Symfony cli
 * Local MySQL server
+* Composer
+
+## Install vendors
+
+    composer install
 
 ## Run server
 
