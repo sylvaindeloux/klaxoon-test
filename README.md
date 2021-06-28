@@ -36,3 +36,14 @@ Will (re)create database and create required tables.
 ## Stop server
 
     make stop
+
+# Documentation
+
+## Delete a bookmark
+
+    DELETE /bookmarks/{id}
+
+**Responses**
+
+* `404` Bookmark not found
+* `204` Bookmark deleted
