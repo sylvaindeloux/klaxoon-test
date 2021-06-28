@@ -25,4 +25,21 @@ final class BookmarkController extends AbstractController
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
+
+    /**
+     * @Route(path = "/{id}/tags/{tag_id}", methods = {"DELETE"})
+     *
+     * @ParamConverter(name = "tag", class = Tag::class, options = {"id" = "tag_id"})
+     */
+    public function removeTag(Bookmark $bookmark, Tag $tag, BookmarkRepository $bookmarkRepository): JsonResponse
+    {
+        if (!$bookmark->getTags()->contains($tag)) {
+            // silent error
+            return new JsonResponse([], Response::HTTP_NO_CONTENT);
+        }
+
+        $bookmarkRepository->removeTag($bookmark, $tag);
+
+        return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    }
 }

@@ -118,4 +118,9 @@ final class Bookmark implements EntityInterface
     {
         return $this->duration;
     }
+
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
 }

@@ -39,7 +39,7 @@ Will (re)create database and create required tables.
 
 # Documentation
 
-## Delete a bookmark
+## Delete a Bookmark
 
     DELETE /bookmarks/{id}
 
@@ -47,3 +47,12 @@ Will (re)create database and create required tables.
 
 * `404` Bookmark not found
 * `204` Bookmark deleted
+
+## Remove a Tag from a Bookmark
+
+    DELETE /bookmarks/{id}/tags/{id}
+
+**Responses**
+
+* `404` Bookmark and/or Tag not found
+* `204` Tag removed
