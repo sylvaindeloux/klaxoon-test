@@ -1,30 +1,19 @@
-# Simple Symfony Docker starter
+# Set-up
 
-You only need `docker` and `docker-compose` installed
+The given stack has been modified to work on a Mac without Docker.
 
-## Start server
+## Requirements
 
-The following command will start the development server at URL http://127.0.0.1:8000/:
+* PHP 7.4.x
+* Symfony cli
+* Local MySQL server
 
-```bash
-./dc up # dc is a wrapper around docker-compose that allows services to be run under the current user
-```
+## Run server
 
-## Useful commands
+    make start
 
-```bash
-# Composer is installed into the php container, it can be invoked as such:
-./dc exec php composer [command]
+Will launch Symfony server with local PHP. Default endpoint is: [127.0.0.1:8000](http://127.0.0.1:8000).
 
-# This is a Symfony Flex project, you can install any Flex recipe
-./dc exec php composer req annotations
+## Stop server
 
-# Symfony console
-./dc exec php bin/console
-
-# Start the MySQL cli
-./dc exec mysql mysql symfony
-
-# Stop all services
-./dc down
-```
+    make stop
