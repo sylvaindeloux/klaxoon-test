@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Table(name = "tags")
@@ -16,6 +17,8 @@ final class Tag implements EntityInterface
     /**
      * @ORM\Id()
      * @ORM\Column()
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private string $id;
 

@@ -9,6 +9,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Table(name = "bookmarks")
@@ -16,56 +17,79 @@ use Doctrine\ORM\Mapping as ORM;
  */
 final class Bookmark implements EntityInterface
 {
+    public const TYPE_VIMEO = 'vimeo';
+    public const TYPE_FLICKR = 'flickr';
+
     /**
      * @ORM\Id()
      * @ORM\Column()
      * @ORM\GeneratedValue(strategy = "UUID")
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private string $id;
 
     /**
      * @ORM\Column()
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private string $type;
 
     /**
      * @ORM\Column()
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private string $url;
 
     /**
      * @ORM\Column()
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private string $title;
 
     /**
      * @ORM\Column()
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private string $author;
 
     /**
      * @ORM\Column(type = "datetime_immutable")
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private DateTimeImmutable $addedAt;
 
     /**
      * @ORM\Column(type = "integer")
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private int $height;
 
     /**
      * @ORM\Column(type = "integer")
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private int $width;
 
     /**
      * @ORM\Column(type = "float", nullable = true)
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private ?float $duration;
 
     /**
      * @ORM\ManyToMany(targetEntity = Tag::class)
      * @ORM\JoinTable(name = "bookmarks_tags")
+     *
+     * @Serializer\Groups({"bookmark:read"})
      */
     private Collection $tags;
 
@@ -122,5 +146,10 @@ final class Bookmark implements EntityInterface
     public function getTags(): Collection
     {
         return $this->tags;
+    }
+
+    public function isVideo(): bool
+    {
+        return self::TYPE_VIMEO === $this->type;
     }
 }
