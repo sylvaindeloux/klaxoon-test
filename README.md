@@ -47,6 +47,15 @@ Will (re)create database and create required tables.
 
 * `200` Bookmarks list
 
+## Get a Bookmark
+
+    GET /bookmarks/{id}
+
+**Response**
+
+* `200` Bookmark data
+* `404` Bookmark not found
+
 ## Delete a Bookmark
 
     DELETE /bookmarks/{id}

@@ -38,6 +38,16 @@ final class BookmarkController extends AbstractController
     }
 
     /**
+     * @Route(path = "/{id}", methods = {"GET"})
+     */
+    public function getBookmark(Bookmark $bookmark): JsonResponse
+    {
+        return $this->json($bookmark, Response::HTTP_OK, [], [
+            'groups' => 'bookmark:read',
+        ]);
+    }
+
+    /**
      * @Route(path = "/{id}", methods = {"DELETE"})
      */
     public function deleteBookmark(Bookmark $bookmark): JsonResponse
