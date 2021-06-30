@@ -28,7 +28,7 @@ final class BookmarkController extends AbstractController
     /**
      * @Route(methods = {"GET"})
      */
-    public function list(): JsonResponse
+    public function listBookmarks(): JsonResponse
     {
         $bookmarks = $this->bookmarkRepository->findAll();
 
@@ -40,7 +40,7 @@ final class BookmarkController extends AbstractController
     /**
      * @Route(path = "/{id}", methods = {"DELETE"})
      */
-    public function delete(Bookmark $bookmark): JsonResponse
+    public function deleteBookmark(Bookmark $bookmark): JsonResponse
     {
         $this->bookmarkRepository->delete($bookmark);
 
@@ -50,7 +50,7 @@ final class BookmarkController extends AbstractController
     /**
      * @Route(path = "/{id}/tags", methods = {"GET"})
      */
-    public function listTags(Bookmark $bookmark): JsonResponse
+    public function listBookmarkTags(Bookmark $bookmark): JsonResponse
     {
         $tags = $bookmark->getTags();
 
@@ -64,7 +64,7 @@ final class BookmarkController extends AbstractController
      *
      * @ParamConverter(name = "tag", class = Tag::class, options = {"id" = "tag_id"})
      */
-    public function removeTag(Bookmark $bookmark, Tag $tag): JsonResponse
+    public function removeBookmarkTag(Bookmark $bookmark, Tag $tag): JsonResponse
     {
         if (!$bookmark->getTags()->contains($tag)) {
             // silent error
