@@ -19,14 +19,14 @@ final class Tag implements EntityInterface
      * @ORM\Column()
      * @ORM\GeneratedValue(strategy = "UUID")
      *
-     * @Serializer\Groups({"bookmark:read"})
+     * @Serializer\Groups({"bookmark:read", "tag:read"})
      */
     private string $id;
 
     /**
      * @ORM\Column()
      *
-     * @Serializer\Groups({"bookmark:read"})
+     * @Serializer\Groups({"bookmark:read", "tag:read"})
      */
     private string $name;
 

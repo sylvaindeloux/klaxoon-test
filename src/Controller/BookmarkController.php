@@ -26,6 +26,18 @@ final class BookmarkController extends AbstractController
     }
 
     /**
+     * @Route(methods = {"GET"})
+     */
+    public function list(): JsonResponse
+    {
+        $bookmarks = $this->bookmarkRepository->findAll();
+
+        return $this->json($bookmarks, Response::HTTP_OK, [], [
+            'groups' => 'bookmark:read',
+        ]);
+    }
+
+    /**
      * @Route(path = "/{id}", methods = {"DELETE"})
      */
     public function delete(Bookmark $bookmark): JsonResponse
@@ -33,6 +45,18 @@ final class BookmarkController extends AbstractController
         $this->bookmarkRepository->delete($bookmark);
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @Route(path = "/{id}/tags", methods = {"GET"})
+     */
+    public function listTags(Bookmark $bookmark): JsonResponse
+    {
+        $tags = $bookmark->getTags();
+
+        return $this->json($tags, Response::HTTP_OK, [], [
+            'groups' => 'tag:read',
+        ]);
     }
 
     /**
