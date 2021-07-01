@@ -93,8 +93,24 @@ final class Bookmark implements EntityInterface
      */
     private Collection $tags;
 
-    public function __construct()
-    {
+    public function __construct(
+        string $type,
+        string $url,
+        string $title,
+        string $author,
+        DateTimeImmutable $addedAt,
+        int $height,
+        int $width,
+        float $duration = null
+    ) {
+        $this->type = $type;
+        $this->url = $url;
+        $this->title = $title;
+        $this->author = $author;
+        $this->addedAt = $addedAt;
+        $this->height = $height;
+        $this->width = $width;
+        $this->duration = $duration;
         $this->tags = new ArrayCollection();
     }
 
@@ -151,5 +167,43 @@ final class Bookmark implements EntityInterface
     public function isVideo(): bool
     {
         return self::TYPE_VIMEO === $this->type;
+    }
+
+    public static function createVimeoBookmark(
+        string $url,
+        string $title,
+        string $author,
+        int $height,
+        int $width,
+        float $duration
+    ): self {
+        return new self(
+            self::TYPE_VIMEO,
+            $url,
+            $title,
+            $author,
+            new DateTimeImmutable(),
+            $height,
+            $width,
+            $duration
+        );
+    }
+
+    public static function createFlickrBookmark(
+        string $url,
+        string $title,
+        string $author,
+        int $height,
+        int $width
+    ): self {
+        return new self(
+            self::TYPE_FLICKR,
+            $url,
+            $title,
+            $author,
+            new DateTimeImmutable(),
+            $height,
+            $width
+        );
     }
 }

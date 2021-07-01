@@ -56,6 +56,22 @@ Will (re)create database and create required tables.
 * `200` Bookmark data
 * `404` Bookmark not found
 
+## Create a Bookmark
+
+    POST /bookmarks
+    
+    {
+        "url": "<Vimeo or Flickr URL>",
+        "tags": [
+            "Keyword 1",
+            "Keyword 2"
+        ]
+    }
+
+**Responses**
+
+* `201` Bookmark saved
+
 ## Delete a Bookmark
 
     DELETE /bookmarks/{id}

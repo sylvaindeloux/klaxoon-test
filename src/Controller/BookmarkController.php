@@ -6,10 +6,12 @@ namespace App\Controller;
 
 use App\Entity\Bookmark;
 use App\Entity\Tag;
+use App\Factory\BookmarkFactory;
 use App\Repository\BookmarkRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -43,6 +45,18 @@ final class BookmarkController extends AbstractController
     public function getBookmark(Bookmark $bookmark): JsonResponse
     {
         return $this->json($bookmark, Response::HTTP_OK, [], [
+            'groups' => 'bookmark:read',
+        ]);
+    }
+
+    /**
+     * @Route(methods = {"POST"})
+     */
+    public function createBookmark(Request $request, BookmarkFactory $bookmarkFactory): JsonResponse
+    {
+        $bookmark = $bookmarkFactory->createBookmarkFromRequest($request);
+
+        return $this->json($bookmark, Response::HTTP_CREATED, [], [
             'groups' => 'bookmark:read',
         ]);
     }

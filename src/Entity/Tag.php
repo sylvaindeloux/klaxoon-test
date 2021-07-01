@@ -24,11 +24,16 @@ final class Tag implements EntityInterface
     private string $id;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(unique = true)
      *
      * @Serializer\Groups({"bookmark:read", "tag:read"})
      */
     private string $name;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
 
     public function getId(): string
     {
@@ -38,5 +43,10 @@ final class Tag implements EntityInterface
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public static function createFromString(string $name): self
+    {
+        return new self($name);
     }
 }
