@@ -90,6 +90,20 @@ Will (re)create database and create required tables.
 * `200` Tags list
 * `404` Bookmark not found
 
+## Add Tag to Bookmark
+
+    POST /bookmarks/{id}/tags
+    
+    [
+        "Keyword 1",
+        "Keyword 2"
+    ]
+
+**Responses**
+
+* `201` Tag(s) saved and assigned to Bookmark
+* `404` Bookmark not found
+
 ## Remove a Tag from a Bookmark
 
     DELETE /bookmarks/{id}/tags/{id}

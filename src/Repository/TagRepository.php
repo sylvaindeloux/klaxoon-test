@@ -20,23 +20,26 @@ final class TagRepository extends AbstractRepository
         $tags = [];
 
         foreach ($tagsNames as $tagName) {
-            $queryBuilder = $this->createQueryBuilder('t');
-
-            $queryBuilder
-                ->where('t.name = :tagName')
-                ->setParameter('tagName', $tagName)
-            ;
-
-            try {
-                $tag = $queryBuilder->getQuery()->getSingleResult();
-            } catch (NoResultException $e) {
-                $tag = $this->createTag($tagName);
-            }
-
-            $tags[] = $tag;
+            $tags[] = $this->retrieveOrCreateTag($tagName);
         }
 
         return $tags;
+    }
+
+    public function retrieveOrCreateTag(string $name): Tag
+    {
+        $queryBuilder = $this->createQueryBuilder('t');
+
+        $queryBuilder
+            ->where('t.name = :name')
+            ->setParameter('name', $name)
+        ;
+
+        try {
+            return $queryBuilder->getQuery()->getSingleResult();
+        } catch (NoResultException $e) {
+            return $this->createTag($name);
+        }
     }
 
     public function createTag(string $name): Tag

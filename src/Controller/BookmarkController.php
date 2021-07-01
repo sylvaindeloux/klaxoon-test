@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Bookmark;
 use App\Entity\Tag;
 use App\Factory\BookmarkFactory;
+use App\Factory\TagFactory;
 use App\Repository\BookmarkRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,6 +81,19 @@ final class BookmarkController extends AbstractController
 
         return $this->json($tags, Response::HTTP_OK, [], [
             'groups' => 'tag:read',
+        ]);
+    }
+
+    /**
+     * @Route(path = "/{id}/tags", methods = {"POST"})
+     */
+    public function addBookmarkTag(Request $request, Bookmark $bookmark, BookmarkFactory $bookmarkFactory, TagFactory $tagFactory): JsonResponse
+    {
+        $tags = $tagFactory->createTagsFromRequest($request);
+        $bookmarkFactory->assignTagsToBookmark($bookmark, $tags);
+
+        return $this->json($bookmark, Response::HTTP_CREATED, [], [
+            'groups' => 'bookmark:read',
         ]);
     }
 

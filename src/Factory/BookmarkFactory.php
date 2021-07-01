@@ -36,21 +36,14 @@ final class BookmarkFactory
         $requestData = json_decode($request->getContent());
 
         $bookmark = $this->createBookmarkFromUrl($requestData->url);
+        $this->bookmarkRepository->save($bookmark);
 
         $tags = isset($requestData->tags)
             ? $this->tagRepository->retrieveOrCreateTags($requestData->tags)
             : []
         ;
 
-        foreach ($tags as $tag) {
-            if ($bookmark->getTags()->contains($tag)) {
-                continue;
-            }
-
-            $bookmark->getTags()->add($tag);
-        }
-
-        $this->bookmarkRepository->save($bookmark);
+        $this->assignTagsToBookmark($bookmark, $tags);
 
         return $bookmark;
     }
@@ -84,5 +77,18 @@ final class BookmarkFactory
             default:
                 throw new RuntimeException(sprintf('Given URL "%s" is incorrect.', $url));
         }
+    }
+
+    public function assignTagsToBookmark(Bookmark $bookmark, array $tags): void
+    {
+        foreach ($tags as $tag) {
+            if ($bookmark->getTags()->contains($tag)) {
+                continue;
+            }
+
+            $bookmark->getTags()->add($tag);
+        }
+
+        $this->bookmarkRepository->save($bookmark);
     }
 }
