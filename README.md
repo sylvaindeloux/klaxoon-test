@@ -51,7 +51,7 @@ Will (re)create database and create required tables.
 
     GET /bookmarks/{id}
 
-**Response**
+**Responses**
 
 * `200` Bookmark data
 * `404` Bookmark not found
@@ -85,7 +85,7 @@ Will (re)create database and create required tables.
 
     GET /bookmarks/{id}/tags
 
-**Response**
+**Responses**
 
 * `200` Tags list
 * `404` Bookmark not found

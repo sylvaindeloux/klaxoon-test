@@ -84,6 +84,5 @@ final class BookmarkFactory
             default:
                 throw new RuntimeException(sprintf('Given URL "%s" is incorrect.', $url));
         }
-
     }
 }
